@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="http://www.projectspong.com/portfolio-type/nodebitlyapi/"
-
-    >node-twitterbot (v0.2.2)</a>
+    <a href="http://www.projectspong.com/portfolio-type/nodebitlyapi/">node-twitterbot (v0.2.2)</a>
 </h1>
 <h4>A NodeJS module for creating Twitter Bots</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.node-twitterbot">module node-twitterbot</a><ol>
 
@@ -1217,7 +1210,7 @@
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function TwitterBot(configOrFile) {
   var e;
-  if (typeof configOrFile === &#x22;string&#x22;) {
+  if (typeof configOrFile === "string") {
     try {
       this.config = JSON.parse(fs.readFileSync(configOrFile));
     } catch (_error) {
@@ -1249,8 +1242,8 @@
   this.domain = null;
   if (EventEmitter.usingDomains) {
     // if there is an active domain, then attach to it.
-    domain = domain || require(&#x27;domain&#x27;);
-    if (domain.active &#x26;&#x26; !(this instanceof domain.Domain)) {
+    domain = domain || require('domain');
+    if (domain.active &amp;&amp; !(this instanceof domain.Domain)) {
       this.domain = domain.active;
     }
   }
@@ -1275,7 +1268,7 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">TwitterBot.listenerCount = function (emitter, type) {
-  if (typeof emitter.listenerCount === &#x27;function&#x27;) {
+  if (typeof emitter.listenerCount === 'function') {
     return emitter.listenerCount(type);
   } else {
     return listenerCount.call(emitter, type);
@@ -1296,7 +1289,7 @@
     <li>description and source-code<pre class="apidocCodePre">TwitterBot.prototype.actionWithName = function (actionName) {
   var action, _i, _len, _ref;
   _ref = this.actions;
-  for (_i = 0, _len = _ref.length; _i &#x3c; _len; _i++) {
+  for (_i = 0, _len = _ref.length; _i &lt; _len; _i++) {
     action = _ref[_i];
     if (action.name === actionName) {
       return action;
@@ -1319,7 +1312,7 @@
     <li>description and source-code<pre class="apidocCodePre">TwitterBot.prototype.addAction = function (actionName, callback) {
   var action,
     _this = this;
-  if (typeof callback === &#x22;function&#x22;) {
+  if (typeof callback === "function") {
     action = new TwitterBotAction(callback, this);
   } else {
     action = callback;
@@ -1327,7 +1320,7 @@
   action.name = actionName;
   this.actions.push(action);
   this.on(actionName, function(params) {
-    return action.emit(&#x22;action&#x22;, params);
+    return action.emit("action", params);
   });
   return action;
 }</pre></li>
@@ -1347,7 +1340,7 @@
   var action, actions, _i, _len, _ref;
   actions = [];
   _ref = this.actions;
-  for (_i = 0, _len = _ref.length; _i &#x3c; _len; _i++) {
+  for (_i = 0, _len = _ref.length; _i &lt; _len; _i++) {
     action = _ref[_i];
     if (groupName) {
       if (action.isPartOfGroup(groupName)) {
@@ -1387,12 +1380,12 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">TwitterBot.prototype.now = function (action, tweet) {
-  if (typeof action === &#x22;string&#x22;) {
+  if (typeof action === "string") {
     action = this.actionWithName(action);
-  } else if (typeof action === &#x22;function&#x22;) {
+  } else if (typeof action === "function") {
     action = new TwitterBotAction(callback, this);
   }
-  return action.emit(&#x22;action&#x22;, this.twitter, tweet);
+  return action.emit("action", this.twitter, tweet);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -1428,10 +1421,10 @@
   var action, i, weight, weightedActions, _i, _j, _len, _ref;
   weightedActions = [];
   _ref = this.actions;
-  for (_i = 0, _len = _ref.length; _i &#x3c; _len; _i++) {
+  for (_i = 0, _len = _ref.length; _i &lt; _len; _i++) {
     action = _ref[_i];
     weight = action.getWeight();
-    for (i = _j = 0; 0 &#x3c;= weight ? _j &#x3c;= weight : _j &#x3e;= weight; i = 0 &#x3c;= weight ? ++_j : --_j) {
+    for (i = _j = 0; 0 &lt;= weight ? _j &lt;= weight : _j &gt;= weight; i = 0 &lt;= weight ? ++_j : --_j) {
       weightedActions.push(action.name);
     }
   }
@@ -1453,7 +1446,7 @@
   var index;
   this.removeAllListeners(actionName);
   index = this.actions.indexOf(actionName);
-  if (index &#x3e; -1) {
+  if (index &gt; -1) {
     return this.actions.splice(index, 1);
   }
 }</pre></li>
@@ -1538,15 +1531,15 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">TwitterBot.prototype.tweet = function (text, callback) {
-  if (typeof text !== &#x22;string&#x22;) {
+  if (typeof text !== "string") {
     return callback({
-      message: &#x22;Cannot post a non-string&#x22;
+      message: "Cannot post a non-string"
     }, null);
   }
-  return this.twitter.post(&#x22;statuses/update&#x22;, {
+  return this.twitter.post("statuses/update", {
     status: text
   }, function(err, response) {
-    if (callback &#x26;&#x26; typeof callback === &#x22;function&#x22;) {
+    if (callback &amp;&amp; typeof callback === "function") {
       return callback(err, response);
     }
   });
@@ -1566,7 +1559,7 @@
     <li>description and source-code<pre class="apidocCodePre">function TwitterBotAction(action, owner) {
   var _this = this;
   this.owner = owner;
-  this.on(&#x22;action&#x22;, function(twitter, tweet) {
+  this.on("action", function(twitter, tweet) {
     return action(twitter, _this, tweet);
   });
   this.init();
@@ -1630,7 +1623,7 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">TwitterBotAction.prototype.isPartOfGroup = function (groupName) {
-  return this.groups.indexOf(groupName) &#x3e; -1;
+  return this.groups.indexOf(groupName) &gt; -1;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -1677,7 +1670,7 @@
     <li>description and source-code<pre class="apidocCodePre">TwitterBotAction.prototype.ungroup = function (groupName) {
   var index;
   index = this.groups.indexOf(groupName);
-  if (index &#x3e; -1) {
+  if (index &gt; -1) {
     this.groups.splice(index, 1);
   }
   return this;
@@ -1744,13 +1737,13 @@
     <li>description and source-code<pre class="apidocCodePre">TwitterBotStreamAction.prototype.init = function () {
   var _this = this;
   this.streams = {};
-  this.on(&#x22;start&#x22;, function() {
+  this.on("start", function() {
     return _this.start();
   });
-  this.on(&#x22;stop&#x22;, function() {
+  this.on("stop", function() {
     return _this.stream.stop();
   });
-  return this.stream_path = &#x22;statuses/sample&#x22;;
+  return this.stream_path = "statuses/sample";
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -1769,8 +1762,8 @@
     _this = this;
   action = new TwitterBotAction(callback, this.owner);
   this.streams[name] = match;
-  return this.on(&#x22;stream-&#x22; + name, function(twitter, tweet) {
-    return action.emit(&#x22;action&#x22;, twitter, tweet);
+  return this.on("stream-" + name, function(twitter, tweet) {
+    return action.emit("action", twitter, tweet);
   });
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -1804,13 +1797,13 @@
     <li>description and source-code<pre class="apidocCodePre">TwitterBotStreamAction.prototype.start = function () {
   var _this = this;
   this.stream = this.owner.twitter.stream(this.stream_path);
-  this.stream.on(&#x22;tweet&#x22;, function(tweet) {
+  this.stream.on("tweet", function(tweet) {
     var key, value, _ref1;
     _ref1 = _this.streams;
     for (key in _ref1) {
       value = _ref1[key];
       if (value(tweet)) {
-        _this.emit(&#x22;stream-&#x22; + key, _this.owner.twitter, tweet);
+        _this.emit("stream-" + key, _this.owner.twitter, tweet);
       }
     }
     return tweet;
@@ -1830,7 +1823,7 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">TwitterBotStreamAction.prototype.stop = function () {
-  return this.emit(&#x22;stop&#x22;);
+  return this.emit("stop");
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -1859,7 +1852,7 @@
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function TwitterBot(configOrFile) {
   var e;
-  if (typeof configOrFile === &#x22;string&#x22;) {
+  if (typeof configOrFile === "string") {
     try {
       this.config = JSON.parse(fs.readFileSync(configOrFile));
     } catch (_error) {
@@ -1906,8 +1899,8 @@
   this.domain = null;
   if (EventEmitter.usingDomains) {
     // if there is an active domain, then attach to it.
-    domain = domain || require(&#x27;domain&#x27;);
-    if (domain.active &#x26;&#x26; !(this instanceof domain.Domain)) {
+    domain = domain || require('domain');
+    if (domain.active &amp;&amp; !(this instanceof domain.Domain)) {
       this.domain = domain.active;
     }
   }
@@ -1932,7 +1925,7 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">listenerCount = function (emitter, type) {
-  if (typeof emitter.listenerCount === &#x27;function&#x27;) {
+  if (typeof emitter.listenerCount === 'function') {
     return emitter.listenerCount(type);
   } else {
     return listenerCount.call(emitter, type);
@@ -1963,8 +1956,8 @@
   this.domain = null;
   if (EventEmitter.usingDomains) {
     // if there is an active domain, then attach to it.
-    domain = domain || require(&#x27;domain&#x27;);
-    if (domain.active &#x26;&#x26; !(this instanceof domain.Domain)) {
+    domain = domain || require('domain');
+    if (domain.active &amp;&amp; !(this instanceof domain.Domain)) {
       this.domain = domain.active;
     }
   }
@@ -1994,7 +1987,7 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">listenerCount = function (emitter, type) {
-  if (typeof emitter.listenerCount === &#x27;function&#x27;) {
+  if (typeof emitter.listenerCount === 'function') {
     return emitter.listenerCount(type);
   } else {
     return listenerCount.call(emitter, type);
@@ -2020,7 +2013,7 @@
     <li>description and source-code<pre class="apidocCodePre">actionWithName = function (actionName) {
   var action, _i, _len, _ref;
   _ref = this.actions;
-  for (_i = 0, _len = _ref.length; _i &#x3c; _len; _i++) {
+  for (_i = 0, _len = _ref.length; _i &lt; _len; _i++) {
     action = _ref[_i];
     if (action.name === actionName) {
       return action;
@@ -2030,18 +2023,18 @@
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-    var tweetAction = Bot.addAction(&#x22;tweet&#x22;, function(twitter, action, tweet) {
-      Bot.tweet(&#x22;I&#x27;m posting a tweet!&#x22;);
+    var tweetAction = Bot.addAction("tweet", function(twitter, action, tweet) {
+      Bot.tweet("I'm posting a tweet!");
     });
 
 But you will rarely need to directly hold onto the tweetAction directly. You can always get a reference to the action by calling
 
-    Bot.<span class="apidocCodeKeywordSpan">actionWithName</span>(&#x22;tweet&#x22;);
+    Bot.<span class="apidocCodeKeywordSpan">actionWithName</span>("tweet");
 
 Which will return the TwitterBotAction object, or null if the name is invalid (or the action already removed)
 
-See more about the [TwitterBotAction class here](https://github.com/nkirby/node-twitterbot/wiki/TwitterBotAction &#x22;TwitterBotAction
- Wiki&#x22;)
+See more about the [TwitterBotAction class here](https://github.com/nkirby/node-twitterbot/wiki/TwitterBotAction "TwitterBotAction
+ Wiki")
 
 ### Grouping Actions
 ...</pre></li>
@@ -2059,7 +2052,7 @@ See more about the [TwitterBotAction class here](https://github.com/nkirby/node-
     <li>description and source-code<pre class="apidocCodePre">addAction = function (actionName, callback) {
   var action,
     _this = this;
-  if (typeof callback === &#x22;function&#x22;) {
+  if (typeof callback === "function") {
     action = new TwitterBotAction(callback, this);
   } else {
     action = callback;
@@ -2067,7 +2060,7 @@ See more about the [TwitterBotAction class here](https://github.com/nkirby/node-
   action.name = actionName;
   this.actions.push(action);
   this.on(actionName, function(params) {
-    return action.emit(&#x22;action&#x22;, params);
+    return action.emit("action", params);
   });
   return action;
 }</pre></li>
@@ -2080,11 +2073,11 @@ In order to get your node-twitterbot to actually do something, you need to defin
 
 So our addAction method might look like this:
 
-    Bot.<span class="apidocCodeKeywordSpan">addAction</span>(&#x22;tweet&#x22;, function(twitter, action, tweet) {
-      Bot.tweet(&#x22;I&#x27;m posting a tweet!&#x22;);
+    Bot.<span class="apidocCodeKeywordSpan">addAction</span>("tweet", function(twitter, action, tweet) {
+      Bot.tweet("I'm posting a tweet!");
     });
 
-The twitter variable passed into the function is the [Twit](https://github.com/ttezel/twit/ &#x22;Twit on Github&#x22;) object associated
+The twitter variable passed into the function is the [Twit](https://github.com/ttezel/twit/ "Twit on Github") object associated
  with a given node-twitterbot, and can be managed directly. The same Twit object is available as [TwitterBot].twitter as well.
 
 The action variable passed into the function is the TwitterBotAction created by addAction.
@@ -2104,7 +2097,7 @@ The action variable passed into the function is the TwitterBotAction created by 
   var action, actions, _i, _len, _ref;
   actions = [];
   _ref = this.actions;
-  for (_i = 0, _len = _ref.length; _i &#x3c; _len; _i++) {
+  for (_i = 0, _len = _ref.length; _i &lt; _len; _i++) {
     action = _ref[_i];
     if (groupName) {
       if (action.isPartOfGroup(groupName)) {
@@ -2118,13 +2111,13 @@ The action variable passed into the function is the TwitterBotAction created by 
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-    Bot.addAction(&#x22;tweet&#x22;, function(twitter, action, tweet) {
-      Bot.tweet(&#x22;I&#x27;m posting a tweet!&#x22;);
-    }).group(&#x22;tweet posting&#x22;);
+    Bot.addAction("tweet", function(twitter, action, tweet) {
+      Bot.tweet("I'm posting a tweet!");
+    }).group("tweet posting");
 
 Retrieving all actions in a group is possible via:
 
-    Bot.<span class="apidocCodeKeywordSpan">allActions</span>(&#x22;tweet posting&#x22;);
+    Bot.<span class="apidocCodeKeywordSpan">allActions</span>("tweet posting");
 
 A TwitterBotAction can be part of multiple groups.
 
@@ -2145,7 +2138,7 @@ If you create multiple actions for a given TwitterBot, you can get a random one 
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function TwitterBot(configOrFile) {
   var e;
-  if (typeof configOrFile === &#x22;string&#x22;) {
+  if (typeof configOrFile === "string") {
     try {
       this.config = JSON.parse(fs.readFileSync(configOrFile));
     } catch (_error) {
@@ -2177,7 +2170,7 @@ If you create multiple actions for a given TwitterBot, you can get a random one 
   return this.streamAction.listen(name, match, action);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-Bot.randomWeightedAction(&#x22;tweet posting&#x22;);
+Bot.randomWeightedAction("tweet posting");
 
 
 ## Streaming
@@ -2206,25 +2199,25 @@ listenerFunction = function(tweet) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">now = function (action, tweet) {
-  if (typeof action === &#x22;string&#x22;) {
+  if (typeof action === "string") {
     action = this.actionWithName(action);
-  } else if (typeof action === &#x22;function&#x22;) {
+  } else if (typeof action === "function") {
     action = new TwitterBotAction(callback, this);
   }
-  return action.emit(&#x22;action&#x22;, this.twitter, tweet);
+  return action.emit("action", this.twitter, tweet);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 }
 
-By returning true, you&#x27;ll tell the listen() function to execute the passed callback method.
+By returning true, you'll tell the listen() function to execute the passed callback method.
 
 For example:
 
-Bot.listen(&#x22;listening&#x22;, tweetThatContainsName, function(twitter, action, tweet) {
-  Bot.<span class="apidocCodeKeywordSpan">now</span>(Bot.randomWeightedAction(&#x22;reply actions&#x22;), tweet);
+Bot.listen("listening", tweetThatContainsName, function(twitter, action, tweet) {
+  Bot.<span class="apidocCodeKeywordSpan">now</span>(Bot.randomWeightedAction("reply actions"), tweet);
 });
 
-Would cause our TwitterBot to perform some random action in the &#x22;reply actions&#x22; group, whenever the tweetThatContainsName
+Would cause our TwitterBot to perform some random action in the "reply actions" group, whenever the tweetThatContainsName
 () function returns true.
 
 You can create a TwitterBotStreamAction via:
@@ -2260,7 +2253,7 @@ If you create multiple actions for a given TwitterBot, you can get a random one 
 
 If you want a random action in a group, you can pass in the group name
 
-    Bot.randomAction(&#x22;group name&#x22;);
+    Bot.randomAction("group name");
 
 ### Weighting Actions
 ...</pre></li>
@@ -2279,10 +2272,10 @@ If you want a random action in a group, you can pass in the group name
   var action, i, weight, weightedActions, _i, _j, _len, _ref;
   weightedActions = [];
   _ref = this.actions;
-  for (_i = 0, _len = _ref.length; _i &#x3c; _len; _i++) {
+  for (_i = 0, _len = _ref.length; _i &lt; _len; _i++) {
     action = _ref[_i];
     weight = action.getWeight();
-    for (i = _j = 0; 0 &#x3c;= weight ? _j &#x3c;= weight : _j &#x3e;= weight; i = 0 &#x3c;= weight ? ++_j : --_j) {
+    for (i = _j = 0; 0 &lt;= weight ? _j &lt;= weight : _j &gt;= weight; i = 0 &lt;= weight ? ++_j : --_j) {
       weightedActions.push(action.name);
     }
   }
@@ -2290,13 +2283,13 @@ If you want a random action in a group, you can pass in the group name
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-Bot.addAction(&#x22;tweet&#x22;, function(twitter, action, tweet) {
-  Bot.tweet(&#x22;I&#x27;m posting a tweet!&#x22;);
-}).group(&#x22;tweet posting&#x22;).weight(10);
+Bot.addAction("tweet", function(twitter, action, tweet) {
+  Bot.tweet("I'm posting a tweet!");
+}).group("tweet posting").weight(10);
 
 You can then get a random action, taking the action weights into account, by calling:
 
-Bot.<span class="apidocCodeKeywordSpan">randomWeightedAction</span>(&#x22;tweet posting&#x22;);
+Bot.<span class="apidocCodeKeywordSpan">randomWeightedAction</span>("tweet posting");
 
 
 ## Streaming
@@ -2321,7 +2314,7 @@ Bot.listen(listenerName, listenerFunction, function(twitter, action, tweet) {
   var index;
   this.removeAllListeners(actionName);
   index = this.actions.indexOf(actionName);
-  if (index &#x3e; -1) {
+  if (index &gt; -1) {
     return this.actions.splice(index, 1);
   }
 }</pre></li>
@@ -2351,13 +2344,13 @@ TwitterBotAction object
 
 You can schedule actions into the future by calling
 
-    Bot.<span class="apidocCodeKeywordSpan">schedule</span>(&#x22;action name&#x22;, 1000);
+    Bot.<span class="apidocCodeKeywordSpan">schedule</span>("action name", 1000);
 
-Would cause the Bot&#x27;s &#x22;action name&#x22; action to be called after 1000 ms (same as setTimeout)
+Would cause the Bot's "action name" action to be called after 1000 ms (same as setTimeout)
 
 ### Rescheduling
 
-Since the second parameter passed into the TwitterBotAction&#x27;s method is the TwitterBotAction itself, you can call this:
+Since the second parameter passed into the TwitterBotAction's method is the TwitterBotAction itself, you can call this:
 ...</pre></li>
     </ul>
 
@@ -2422,15 +2415,15 @@ Since the second parameter passed into the TwitterBotAction&#x27;s method is the
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">tweet = function (text, callback) {
-  if (typeof text !== &#x22;string&#x22;) {
+  if (typeof text !== "string") {
     return callback({
-      message: &#x22;Cannot post a non-string&#x22;
+      message: "Cannot post a non-string"
     }, null);
   }
-  return this.twitter.post(&#x22;statuses/update&#x22;, {
+  return this.twitter.post("statuses/update", {
     status: text
   }, function(err, response) {
-    if (callback &#x26;&#x26; typeof callback === &#x22;function&#x22;) {
+    if (callback &amp;&amp; typeof callback === "function") {
       return callback(err, response);
     }
   });
@@ -2442,11 +2435,11 @@ Since the second parameter passed into the TwitterBotAction&#x27;s method is the
 
 So our addAction method might look like this:
 
-    Bot.addAction(&#x22;tweet&#x22;, function(twitter, action, tweet) {
-      Bot.<span class="apidocCodeKeywordSpan">tweet</span>(&#x22;I&#x27;m posting a tweet!&#x22;);
+    Bot.addAction("tweet", function(twitter, action, tweet) {
+      Bot.<span class="apidocCodeKeywordSpan">tweet</span>("I'm posting a tweet!");
     });
 
-The twitter variable passed into the function is the [Twit](https://github.com/ttezel/twit/ &#x22;Twit on Github&#x22;) object associated
+The twitter variable passed into the function is the [Twit](https://github.com/ttezel/twit/ "Twit on Github") object associated
  with a given node-twitterbot, and can be managed directly. The same Twit object is available as [TwitterBot].twitter as well.
 
 The action variable passed into the function is the TwitterBotAction created by addAction.
@@ -2472,7 +2465,7 @@ And the tweet object is the tweet passed into the action (if there was one)
     <li>description and source-code<pre class="apidocCodePre">actionWithName = function (actionName) {
   var action, _i, _len, _ref;
   _ref = this.actions;
-  for (_i = 0, _len = _ref.length; _i &#x3c; _len; _i++) {
+  for (_i = 0, _len = _ref.length; _i &lt; _len; _i++) {
     action = _ref[_i];
     if (action.name === actionName) {
       return action;
@@ -2482,18 +2475,18 @@ And the tweet object is the tweet passed into the action (if there was one)
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-    var tweetAction = Bot.addAction(&#x22;tweet&#x22;, function(twitter, action, tweet) {
-      Bot.tweet(&#x22;I&#x27;m posting a tweet!&#x22;);
+    var tweetAction = Bot.addAction("tweet", function(twitter, action, tweet) {
+      Bot.tweet("I'm posting a tweet!");
     });
 
 But you will rarely need to directly hold onto the tweetAction directly. You can always get a reference to the action by calling
 
-    Bot.<span class="apidocCodeKeywordSpan">actionWithName</span>(&#x22;tweet&#x22;);
+    Bot.<span class="apidocCodeKeywordSpan">actionWithName</span>("tweet");
 
 Which will return the TwitterBotAction object, or null if the name is invalid (or the action already removed)
 
-See more about the [TwitterBotAction class here](https://github.com/nkirby/node-twitterbot/wiki/TwitterBotAction &#x22;TwitterBotAction
- Wiki&#x22;)
+See more about the [TwitterBotAction class here](https://github.com/nkirby/node-twitterbot/wiki/TwitterBotAction "TwitterBotAction
+ Wiki")
 
 ### Grouping Actions
 ...</pre></li>
@@ -2516,7 +2509,7 @@ See more about the [TwitterBotAction class here](https://github.com/nkirby/node-
     <li>description and source-code<pre class="apidocCodePre">addAction = function (actionName, callback) {
   var action,
     _this = this;
-  if (typeof callback === &#x22;function&#x22;) {
+  if (typeof callback === "function") {
     action = new TwitterBotAction(callback, this);
   } else {
     action = callback;
@@ -2524,7 +2517,7 @@ See more about the [TwitterBotAction class here](https://github.com/nkirby/node-
   action.name = actionName;
   this.actions.push(action);
   this.on(actionName, function(params) {
-    return action.emit(&#x22;action&#x22;, params);
+    return action.emit("action", params);
   });
   return action;
 }</pre></li>
@@ -2537,11 +2530,11 @@ In order to get your node-twitterbot to actually do something, you need to defin
 
 So our addAction method might look like this:
 
-    Bot.<span class="apidocCodeKeywordSpan">addAction</span>(&#x22;tweet&#x22;, function(twitter, action, tweet) {
-      Bot.tweet(&#x22;I&#x27;m posting a tweet!&#x22;);
+    Bot.<span class="apidocCodeKeywordSpan">addAction</span>("tweet", function(twitter, action, tweet) {
+      Bot.tweet("I'm posting a tweet!");
     });
 
-The twitter variable passed into the function is the [Twit](https://github.com/ttezel/twit/ &#x22;Twit on Github&#x22;) object associated
+The twitter variable passed into the function is the [Twit](https://github.com/ttezel/twit/ "Twit on Github") object associated
  with a given node-twitterbot, and can be managed directly. The same Twit object is available as [TwitterBot].twitter as well.
 
 The action variable passed into the function is the TwitterBotAction created by addAction.
@@ -2566,7 +2559,7 @@ The action variable passed into the function is the TwitterBotAction created by 
   var action, actions, _i, _len, _ref;
   actions = [];
   _ref = this.actions;
-  for (_i = 0, _len = _ref.length; _i &#x3c; _len; _i++) {
+  for (_i = 0, _len = _ref.length; _i &lt; _len; _i++) {
     action = _ref[_i];
     if (groupName) {
       if (action.isPartOfGroup(groupName)) {
@@ -2580,13 +2573,13 @@ The action variable passed into the function is the TwitterBotAction created by 
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-    Bot.addAction(&#x22;tweet&#x22;, function(twitter, action, tweet) {
-      Bot.tweet(&#x22;I&#x27;m posting a tweet!&#x22;);
-    }).group(&#x22;tweet posting&#x22;);
+    Bot.addAction("tweet", function(twitter, action, tweet) {
+      Bot.tweet("I'm posting a tweet!");
+    }).group("tweet posting");
 
 Retrieving all actions in a group is possible via:
 
-    Bot.<span class="apidocCodeKeywordSpan">allActions</span>(&#x22;tweet posting&#x22;);
+    Bot.<span class="apidocCodeKeywordSpan">allActions</span>("tweet posting");
 
 A TwitterBotAction can be part of multiple groups.
 
@@ -2614,7 +2607,7 @@ If you create multiple actions for a given TwitterBot, you can get a random one 
   return this.streamAction.listen(name, match, action);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-Bot.randomWeightedAction(&#x22;tweet posting&#x22;);
+Bot.randomWeightedAction("tweet posting");
 
 
 ## Streaming
@@ -2648,25 +2641,25 @@ listenerFunction = function(tweet) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">now = function (action, tweet) {
-  if (typeof action === &#x22;string&#x22;) {
+  if (typeof action === "string") {
     action = this.actionWithName(action);
-  } else if (typeof action === &#x22;function&#x22;) {
+  } else if (typeof action === "function") {
     action = new TwitterBotAction(callback, this);
   }
-  return action.emit(&#x22;action&#x22;, this.twitter, tweet);
+  return action.emit("action", this.twitter, tweet);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 }
 
-By returning true, you&#x27;ll tell the listen() function to execute the passed callback method.
+By returning true, you'll tell the listen() function to execute the passed callback method.
 
 For example:
 
-Bot.listen(&#x22;listening&#x22;, tweetThatContainsName, function(twitter, action, tweet) {
-  Bot.<span class="apidocCodeKeywordSpan">now</span>(Bot.randomWeightedAction(&#x22;reply actions&#x22;), tweet);
+Bot.listen("listening", tweetThatContainsName, function(twitter, action, tweet) {
+  Bot.<span class="apidocCodeKeywordSpan">now</span>(Bot.randomWeightedAction("reply actions"), tweet);
 });
 
-Would cause our TwitterBot to perform some random action in the &#x22;reply actions&#x22; group, whenever the tweetThatContainsName
+Would cause our TwitterBot to perform some random action in the "reply actions" group, whenever the tweetThatContainsName
 () function returns true.
 
 You can create a TwitterBotStreamAction via:
@@ -2707,7 +2700,7 @@ If you create multiple actions for a given TwitterBot, you can get a random one 
 
 If you want a random action in a group, you can pass in the group name
 
-    Bot.randomAction(&#x22;group name&#x22;);
+    Bot.randomAction("group name");
 
 ### Weighting Actions
 ...</pre></li>
@@ -2731,10 +2724,10 @@ If you want a random action in a group, you can pass in the group name
   var action, i, weight, weightedActions, _i, _j, _len, _ref;
   weightedActions = [];
   _ref = this.actions;
-  for (_i = 0, _len = _ref.length; _i &#x3c; _len; _i++) {
+  for (_i = 0, _len = _ref.length; _i &lt; _len; _i++) {
     action = _ref[_i];
     weight = action.getWeight();
-    for (i = _j = 0; 0 &#x3c;= weight ? _j &#x3c;= weight : _j &#x3e;= weight; i = 0 &#x3c;= weight ? ++_j : --_j) {
+    for (i = _j = 0; 0 &lt;= weight ? _j &lt;= weight : _j &gt;= weight; i = 0 &lt;= weight ? ++_j : --_j) {
       weightedActions.push(action.name);
     }
   }
@@ -2742,13 +2735,13 @@ If you want a random action in a group, you can pass in the group name
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-Bot.addAction(&#x22;tweet&#x22;, function(twitter, action, tweet) {
-  Bot.tweet(&#x22;I&#x27;m posting a tweet!&#x22;);
-}).group(&#x22;tweet posting&#x22;).weight(10);
+Bot.addAction("tweet", function(twitter, action, tweet) {
+  Bot.tweet("I'm posting a tweet!");
+}).group("tweet posting").weight(10);
 
 You can then get a random action, taking the action weights into account, by calling:
 
-Bot.<span class="apidocCodeKeywordSpan">randomWeightedAction</span>(&#x22;tweet posting&#x22;);
+Bot.<span class="apidocCodeKeywordSpan">randomWeightedAction</span>("tweet posting");
 
 
 ## Streaming
@@ -2778,7 +2771,7 @@ Bot.listen(listenerName, listenerFunction, function(twitter, action, tweet) {
   var index;
   this.removeAllListeners(actionName);
   index = this.actions.indexOf(actionName);
-  if (index &#x3e; -1) {
+  if (index &gt; -1) {
     return this.actions.splice(index, 1);
   }
 }</pre></li>
@@ -2813,13 +2806,13 @@ TwitterBotAction object
 
 You can schedule actions into the future by calling
 
-    Bot.<span class="apidocCodeKeywordSpan">schedule</span>(&#x22;action name&#x22;, 1000);
+    Bot.<span class="apidocCodeKeywordSpan">schedule</span>("action name", 1000);
 
-Would cause the Bot&#x27;s &#x22;action name&#x22; action to be called after 1000 ms (same as setTimeout)
+Would cause the Bot's "action name" action to be called after 1000 ms (same as setTimeout)
 
 ### Rescheduling
 
-Since the second parameter passed into the TwitterBotAction&#x27;s method is the TwitterBotAction itself, you can call this:
+Since the second parameter passed into the TwitterBotAction's method is the TwitterBotAction itself, you can call this:
 ...</pre></li>
     </ul>
 
@@ -2904,15 +2897,15 @@ Since the second parameter passed into the TwitterBotAction&#x27;s method is the
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">tweet = function (text, callback) {
-  if (typeof text !== &#x22;string&#x22;) {
+  if (typeof text !== "string") {
     return callback({
-      message: &#x22;Cannot post a non-string&#x22;
+      message: "Cannot post a non-string"
     }, null);
   }
-  return this.twitter.post(&#x22;statuses/update&#x22;, {
+  return this.twitter.post("statuses/update", {
     status: text
   }, function(err, response) {
-    if (callback &#x26;&#x26; typeof callback === &#x22;function&#x22;) {
+    if (callback &amp;&amp; typeof callback === "function") {
       return callback(err, response);
     }
   });
@@ -2924,11 +2917,11 @@ Since the second parameter passed into the TwitterBotAction&#x27;s method is the
 
 So our addAction method might look like this:
 
-    Bot.addAction(&#x22;tweet&#x22;, function(twitter, action, tweet) {
-      Bot.<span class="apidocCodeKeywordSpan">tweet</span>(&#x22;I&#x27;m posting a tweet!&#x22;);
+    Bot.addAction("tweet", function(twitter, action, tweet) {
+      Bot.<span class="apidocCodeKeywordSpan">tweet</span>("I'm posting a tweet!");
     });
 
-The twitter variable passed into the function is the [Twit](https://github.com/ttezel/twit/ &#x22;Twit on Github&#x22;) object associated
+The twitter variable passed into the function is the [Twit](https://github.com/ttezel/twit/ "Twit on Github") object associated
  with a given node-twitterbot, and can be managed directly. The same Twit object is available as [TwitterBot].twitter as well.
 
 The action variable passed into the function is the TwitterBotAction created by addAction.
@@ -2956,7 +2949,7 @@ And the tweet object is the tweet passed into the action (if there was one)
     <li>description and source-code<pre class="apidocCodePre">function TwitterBotAction(action, owner) {
   var _this = this;
   this.owner = owner;
-  this.on(&#x22;action&#x22;, function(twitter, tweet) {
+  this.on("action", function(twitter, tweet) {
     return action(twitter, _this, tweet);
   });
   this.init();
@@ -2994,8 +2987,8 @@ And the tweet object is the tweet passed into the action (if there was one)
   this.domain = null;
   if (EventEmitter.usingDomains) {
     // if there is an active domain, then attach to it.
-    domain = domain || require(&#x27;domain&#x27;);
-    if (domain.active &#x26;&#x26; !(this instanceof domain.Domain)) {
+    domain = domain || require('domain');
+    if (domain.active &amp;&amp; !(this instanceof domain.Domain)) {
       this.domain = domain.active;
     }
   }
@@ -3020,7 +3013,7 @@ And the tweet object is the tweet passed into the action (if there was one)
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">listenerCount = function (emitter, type) {
-  if (typeof emitter.listenerCount === &#x27;function&#x27;) {
+  if (typeof emitter.listenerCount === 'function') {
     return emitter.listenerCount(type);
   } else {
     return listenerCount.call(emitter, type);
@@ -3050,7 +3043,7 @@ And the tweet object is the tweet passed into the action (if there was one)
     <li>description and source-code<pre class="apidocCodePre">function TwitterBotAction(action, owner) {
   var _this = this;
   this.owner = owner;
-  this.on(&#x22;action&#x22;, function(twitter, tweet) {
+  this.on("action", function(twitter, tweet) {
     return action(twitter, _this, tweet);
   });
   this.init();
@@ -3094,13 +3087,13 @@ And the tweet object is the tweet passed into the action (if there was one)
 
 Actions are groupable by calling the TwitterBotAction objects group() method
 
-    Bot.addAction(&#x22;tweet&#x22;, function(twitter, action, tweet) {
-      Bot.tweet(&#x22;I&#x27;m posting a tweet!&#x22;);
-    }).<span class="apidocCodeKeywordSpan">group</span>(&#x22;tweet posting&#x22;);
+    Bot.addAction("tweet", function(twitter, action, tweet) {
+      Bot.tweet("I'm posting a tweet!");
+    }).<span class="apidocCodeKeywordSpan">group</span>("tweet posting");
 
 Retrieving all actions in a group is possible via:
 
-    Bot.allActions(&#x22;tweet posting&#x22;);
+    Bot.allActions("tweet posting");
 
 A TwitterBotAction can be part of multiple groups.
 ...</pre></li>
@@ -3129,7 +3122,7 @@ A TwitterBotAction can be part of multiple groups.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">isPartOfGroup = function (groupName) {
-  return this.groups.indexOf(groupName) &#x3e; -1;
+  return this.groups.indexOf(groupName) &gt; -1;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3149,15 +3142,15 @@ A TwitterBotAction can be part of multiple groups.
     <li>example usage<pre class="apidocCodePre">...
 }
 
-By returning true, you&#x27;ll tell the listen() function to execute the passed callback method.
+By returning true, you'll tell the listen() function to execute the passed callback method.
 
 For example:
 
-Bot.listen(&#x22;listening&#x22;, tweetThatContainsName, function(twitter, action, tweet) {
-  Bot.<span class="apidocCodeKeywordSpan">now</span>(Bot.randomWeightedAction(&#x22;reply actions&#x22;), tweet);
+Bot.listen("listening", tweetThatContainsName, function(twitter, action, tweet) {
+  Bot.<span class="apidocCodeKeywordSpan">now</span>(Bot.randomWeightedAction("reply actions"), tweet);
 });
 
-Would cause our TwitterBot to perform some random action in the &#x22;reply actions&#x22; group, whenever the tweetThatContainsName
+Would cause our TwitterBot to perform some random action in the "reply actions" group, whenever the tweetThatContainsName
 () function returns true.
 
 You can create a TwitterBotStreamAction via:
@@ -3187,13 +3180,13 @@ TwitterBotAction object
 
 You can schedule actions into the future by calling
 
-    Bot.<span class="apidocCodeKeywordSpan">schedule</span>(&#x22;action name&#x22;, 1000);
+    Bot.<span class="apidocCodeKeywordSpan">schedule</span>("action name", 1000);
 
-Would cause the Bot&#x27;s &#x22;action name&#x22; action to be called after 1000 ms (same as setTimeout)
+Would cause the Bot's "action name" action to be called after 1000 ms (same as setTimeout)
 
 ### Rescheduling
 
-Since the second parameter passed into the TwitterBotAction&#x27;s method is the TwitterBotAction itself, you can call this:
+Since the second parameter passed into the TwitterBotAction's method is the TwitterBotAction itself, you can call this:
 ...</pre></li>
     </ul>
 
@@ -3209,7 +3202,7 @@ Since the second parameter passed into the TwitterBotAction&#x27;s method is the
     <li>description and source-code<pre class="apidocCodePre">ungroup = function (groupName) {
   var index;
   index = this.groups.indexOf(groupName);
-  if (index &#x3e; -1) {
+  if (index &gt; -1) {
     this.groups.splice(index, 1);
   }
   return this;
@@ -3236,13 +3229,13 @@ Since the second parameter passed into the TwitterBotAction&#x27;s method is the
 
 If you want to make the randomAction function a little less random, you can give weights to all TwitterBotActions
 
-    Bot.addAction(&#x22;tweet&#x22;, function(twitter, action, tweet) {
-      Bot.tweet(&#x22;I&#x27;m posting a tweet!&#x22;);
-    }).group(&#x22;tweet posting&#x22;).<span class="apidocCodeKeywordSpan">weight</span>(10);
+    Bot.addAction("tweet", function(twitter, action, tweet) {
+      Bot.tweet("I'm posting a tweet!");
+    }).group("tweet posting").<span class="apidocCodeKeywordSpan">weight</span>(10);
 
 You can then get a random action, taking the action weights into account, by calling:
 
-    Bot.randomWeightedAction(&#x22;tweet posting&#x22;);
+    Bot.randomWeightedAction("tweet posting");
 
 
 ## Streaming
@@ -3293,13 +3286,13 @@ You can then get a random action, taking the action weights into account, by cal
 
 Actions are groupable by calling the TwitterBotAction objects group() method
 
-    Bot.addAction(&#x22;tweet&#x22;, function(twitter, action, tweet) {
-      Bot.tweet(&#x22;I&#x27;m posting a tweet!&#x22;);
-    }).<span class="apidocCodeKeywordSpan">group</span>(&#x22;tweet posting&#x22;);
+    Bot.addAction("tweet", function(twitter, action, tweet) {
+      Bot.tweet("I'm posting a tweet!");
+    }).<span class="apidocCodeKeywordSpan">group</span>("tweet posting");
 
 Retrieving all actions in a group is possible via:
 
-    Bot.allActions(&#x22;tweet posting&#x22;);
+    Bot.allActions("tweet posting");
 
 A TwitterBotAction can be part of multiple groups.
 ...</pre></li>
@@ -3338,7 +3331,7 @@ A TwitterBotAction can be part of multiple groups.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">isPartOfGroup = function (groupName) {
-  return this.groups.indexOf(groupName) &#x3e; -1;
+  return this.groups.indexOf(groupName) &gt; -1;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3363,15 +3356,15 @@ A TwitterBotAction can be part of multiple groups.
     <li>example usage<pre class="apidocCodePre">...
 }
 
-By returning true, you&#x27;ll tell the listen() function to execute the passed callback method.
+By returning true, you'll tell the listen() function to execute the passed callback method.
 
 For example:
 
-Bot.listen(&#x22;listening&#x22;, tweetThatContainsName, function(twitter, action, tweet) {
-  Bot.<span class="apidocCodeKeywordSpan">now</span>(Bot.randomWeightedAction(&#x22;reply actions&#x22;), tweet);
+Bot.listen("listening", tweetThatContainsName, function(twitter, action, tweet) {
+  Bot.<span class="apidocCodeKeywordSpan">now</span>(Bot.randomWeightedAction("reply actions"), tweet);
 });
 
-Would cause our TwitterBot to perform some random action in the &#x22;reply actions&#x22; group, whenever the tweetThatContainsName
+Would cause our TwitterBot to perform some random action in the "reply actions" group, whenever the tweetThatContainsName
 () function returns true.
 
 You can create a TwitterBotStreamAction via:
@@ -3406,13 +3399,13 @@ TwitterBotAction object
 
 You can schedule actions into the future by calling
 
-    Bot.<span class="apidocCodeKeywordSpan">schedule</span>(&#x22;action name&#x22;, 1000);
+    Bot.<span class="apidocCodeKeywordSpan">schedule</span>("action name", 1000);
 
-Would cause the Bot&#x27;s &#x22;action name&#x22; action to be called after 1000 ms (same as setTimeout)
+Would cause the Bot's "action name" action to be called after 1000 ms (same as setTimeout)
 
 ### Rescheduling
 
-Since the second parameter passed into the TwitterBotAction&#x27;s method is the TwitterBotAction itself, you can call this:
+Since the second parameter passed into the TwitterBotAction's method is the TwitterBotAction itself, you can call this:
 ...</pre></li>
     </ul>
 
@@ -3433,7 +3426,7 @@ Since the second parameter passed into the TwitterBotAction&#x27;s method is the
     <li>description and source-code<pre class="apidocCodePre">ungroup = function (groupName) {
   var index;
   index = this.groups.indexOf(groupName);
-  if (index &#x3e; -1) {
+  if (index &gt; -1) {
     this.groups.splice(index, 1);
   }
   return this;
@@ -3465,13 +3458,13 @@ Since the second parameter passed into the TwitterBotAction&#x27;s method is the
 
 If you want to make the randomAction function a little less random, you can give weights to all TwitterBotActions
 
-    Bot.addAction(&#x22;tweet&#x22;, function(twitter, action, tweet) {
-      Bot.tweet(&#x22;I&#x27;m posting a tweet!&#x22;);
-    }).group(&#x22;tweet posting&#x22;).<span class="apidocCodeKeywordSpan">weight</span>(10);
+    Bot.addAction("tweet", function(twitter, action, tweet) {
+      Bot.tweet("I'm posting a tweet!");
+    }).group("tweet posting").<span class="apidocCodeKeywordSpan">weight</span>(10);
 
 You can then get a random action, taking the action weights into account, by calling:
 
-    Bot.randomWeightedAction(&#x22;tweet posting&#x22;);
+    Bot.randomWeightedAction("tweet posting");
 
 
 ## Streaming
@@ -3529,8 +3522,8 @@ You can then get a random action, taking the action weights into account, by cal
   this.domain = null;
   if (EventEmitter.usingDomains) {
     // if there is an active domain, then attach to it.
-    domain = domain || require(&#x27;domain&#x27;);
-    if (domain.active &#x26;&#x26; !(this instanceof domain.Domain)) {
+    domain = domain || require('domain');
+    if (domain.active &amp;&amp; !(this instanceof domain.Domain)) {
       this.domain = domain.active;
     }
   }
@@ -3555,7 +3548,7 @@ You can then get a random action, taking the action weights into account, by cal
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">listenerCount = function (emitter, type) {
-  if (typeof emitter.listenerCount === &#x27;function&#x27;) {
+  if (typeof emitter.listenerCount === 'function') {
     return emitter.listenerCount(type);
   } else {
     return listenerCount.call(emitter, type);
@@ -3616,13 +3609,13 @@ You can then get a random action, taking the action weights into account, by cal
     <li>description and source-code<pre class="apidocCodePre">init = function () {
   var _this = this;
   this.streams = {};
-  this.on(&#x22;start&#x22;, function() {
+  this.on("start", function() {
     return _this.start();
   });
-  this.on(&#x22;stop&#x22;, function() {
+  this.on("stop", function() {
     return _this.stream.stop();
   });
-  return this.stream_path = &#x22;statuses/sample&#x22;;
+  return this.stream_path = "statuses/sample";
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3641,12 +3634,12 @@ You can then get a random action, taking the action weights into account, by cal
     _this = this;
   action = new TwitterBotAction(callback, this.owner);
   this.streams[name] = match;
-  return this.on(&#x22;stream-&#x22; + name, function(twitter, tweet) {
-    return action.emit(&#x22;action&#x22;, twitter, tweet);
+  return this.on("stream-" + name, function(twitter, tweet) {
+    return action.emit("action", twitter, tweet);
   });
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-Bot.randomWeightedAction(&#x22;tweet posting&#x22;);
+Bot.randomWeightedAction("tweet posting");
 
 
 ## Streaming
@@ -3693,13 +3686,13 @@ listenerFunction = function(tweet) {
     <li>description and source-code<pre class="apidocCodePre">start = function () {
   var _this = this;
   this.stream = this.owner.twitter.stream(this.stream_path);
-  this.stream.on(&#x22;tweet&#x22;, function(tweet) {
+  this.stream.on("tweet", function(tweet) {
     var key, value, _ref1;
     _ref1 = _this.streams;
     for (key in _ref1) {
       value = _ref1[key];
       if (value(tweet)) {
-        _this.emit(&#x22;stream-&#x22; + key, _this.owner.twitter, tweet);
+        _this.emit("stream-" + key, _this.owner.twitter, tweet);
       }
     }
     return tweet;
@@ -3719,7 +3712,7 @@ listenerFunction = function(tweet) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">stop = function () {
-  return this.emit(&#x22;stop&#x22;);
+  return this.emit("stop");
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3761,13 +3754,13 @@ listenerFunction = function(tweet) {
     <li>description and source-code<pre class="apidocCodePre">init = function () {
   var _this = this;
   this.streams = {};
-  this.on(&#x22;start&#x22;, function() {
+  this.on("start", function() {
     return _this.start();
   });
-  this.on(&#x22;stop&#x22;, function() {
+  this.on("stop", function() {
     return _this.stream.stop();
   });
-  return this.stream_path = &#x22;statuses/sample&#x22;;
+  return this.stream_path = "statuses/sample";
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3791,12 +3784,12 @@ listenerFunction = function(tweet) {
     _this = this;
   action = new TwitterBotAction(callback, this.owner);
   this.streams[name] = match;
-  return this.on(&#x22;stream-&#x22; + name, function(twitter, tweet) {
-    return action.emit(&#x22;action&#x22;, twitter, tweet);
+  return this.on("stream-" + name, function(twitter, tweet) {
+    return action.emit("action", twitter, tweet);
   });
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-Bot.randomWeightedAction(&#x22;tweet posting&#x22;);
+Bot.randomWeightedAction("tweet posting");
 
 
 ## Streaming
@@ -3853,13 +3846,13 @@ listenerFunction = function(tweet) {
     <li>description and source-code<pre class="apidocCodePre">start = function () {
   var _this = this;
   this.stream = this.owner.twitter.stream(this.stream_path);
-  this.stream.on(&#x22;tweet&#x22;, function(tweet) {
+  this.stream.on("tweet", function(tweet) {
     var key, value, _ref1;
     _ref1 = _this.streams;
     for (key in _ref1) {
       value = _ref1[key];
       if (value(tweet)) {
-        _this.emit(&#x22;stream-&#x22; + key, _this.owner.twitter, tweet);
+        _this.emit("stream-" + key, _this.owner.twitter, tweet);
       }
     }
     return tweet;
@@ -3884,7 +3877,7 @@ listenerFunction = function(tweet) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">stop = function () {
-  return this.emit(&#x22;stop&#x22;);
+  return this.emit("stop");
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3898,3 +3891,4 @@ listenerFunction = function(tweet) {
     ]
 </div>
 </div>
+</body></html>
