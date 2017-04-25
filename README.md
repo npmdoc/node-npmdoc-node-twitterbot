@@ -1,4 +1,7 @@
-# api documentation for  [node-twitterbot (v0.2.2)](http://www.projectspong.com/portfolio-type/nodebitlyapi/)  [![npm package](https://img.shields.io/npm/v/npmdoc-node-twitterbot.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-node-twitterbot) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-node-twitterbot.svg)](https://travis-ci.org/npmdoc/node-npmdoc-node-twitterbot)
+# npmdoc-node-twitterbot
+
+#### basic api documentation for  [node-twitterbot (v0.2.2)](http://www.projectspong.com/portfolio-type/nodebitlyapi/)  [![npm package](https://img.shields.io/npm/v/npmdoc-node-twitterbot.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-node-twitterbot) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-node-twitterbot.svg)](https://travis-ci.org/npmdoc/node-npmdoc-node-twitterbot)
+
 #### A NodeJS module for creating Twitter Bots
 
 [![NPM](https://nodei.co/npm/node-twitterbot.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/node-twitterbot)
@@ -66,7 +69,8 @@
         "type": "git",
         "url": "git+https://github.com/nkirbygr/node-twitterbot.git"
     },
-    "version": "0.2.2"
+    "version": "0.2.2",
+    "bin": {}
 }
 ```
 
